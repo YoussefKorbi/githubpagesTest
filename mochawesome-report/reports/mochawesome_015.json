@@ -1,0 +1,107 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 1,
+    "passes": 1,
+    "pending": 0,
+    "failures": 0,
+    "start": "2024-09-20T17:48:35.173Z",
+    "end": "2024-09-20T17:49:06.666Z",
+    "duration": 31493,
+    "testsRegistered": 1,
+    "passPercent": 100,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "0ee87f94-2962-4072-b529-4cd271f44d55",
+      "title": "",
+      "fullFile": "integration/tracking/user/export-activities.smoke.cy.ts",
+      "file": "integration/tracking/user/export-activities.smoke.cy.ts",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "de5159c0-eb28-4a03-9096-907a9d90e373",
+          "title": "export activities PFM-TC-2035",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "Export activities",
+              "fullTitle": "export activities PFM-TC-2035 Export activities",
+              "timedOut": null,
+              "duration": 3104,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "cy.conserveSession();\ncy.navigateToTrackingPages('user', 'activities', wsName);\n_page_objects_models_tracking_page__WEBPACK_IMPORTED_MODULE_0__[\"default\"].filterButton('date-filter').click();\n_page_objects_models_tracking_page__WEBPACK_IMPORTED_MODULE_0__[\"default\"].bodyBtnPeriod('yesterday').click();\n_page_objects_models_tracking_page__WEBPACK_IMPORTED_MODULE_0__[\"default\"].bodyBtnExport().click();\n_page_objects_models_tracking_page__WEBPACK_IMPORTED_MODULE_0__[\"default\"].bodySelectExportCSVFile().click();\ncy.getLastDownloadedFile(downloadsFolder).then(function (filePath) {\n    file = filePath;\n    cy.log(\"Latest downloaded file: \".concat(filePath));\n    cy.readFile(filePath).then(function (content) {\n        // Split the content into lines\n        var lines = content.split('\\n');\n        // Get the headers from the first line\n        var headers = lines[0].split(';').map(function (header) { return header.replace(/\"/g, ''); });\n        // Add an assertion command to the Cypress chain\n        cy.wrap(headers).should(function (headers) {\n            // Assert that each expected field is present in the headers\n            expectedFields.forEach(function (field) {\n                expect(headers).to.include(field);\n            });\n        });\n    });\n});",
+              "err": {},
+              "uuid": "f48a2b0d-7646-4518-b033-7d9640928415",
+              "parentUUID": "de5159c0-eb28-4a03-9096-907a9d90e373",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "f48a2b0d-7646-4518-b033-7d9640928415"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 3104,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.0.1"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "mochawesome",
+        "saveHtml": false,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "7.1.3"
+    },
+    "marge": {
+      "options": {
+        "reportDir": "reports",
+        "reportTitle": "End 2 end smoke tests",
+        "reportPageTitle": "End 2 end tests report",
+        "overwrite": false,
+        "html": false,
+        "json": true
+      },
+      "version": "6.2.0"
+    }
+  }
+}

@@ -1,0 +1,107 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 1,
+    "passes": 1,
+    "pending": 0,
+    "failures": 0,
+    "start": "2024-09-20T17:43:49.558Z",
+    "end": "2024-09-20T17:43:49.882Z",
+    "duration": 324,
+    "testsRegistered": 1,
+    "passPercent": 100,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "543209df-4241-4330-94d3-5ed20c35ff04",
+      "title": "",
+      "fullFile": "integration/health check/HermodHealthCheck.smoke.cy.ts",
+      "file": "integration/health check/HermodHealthCheck.smoke.cy.ts",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "2ce267ea-05bd-4099-bbf9-296d77852fb8",
+          "title": "Hermod Health Check",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "Hermod Health Check",
+              "fullTitle": "Hermod Health Check Hermod Health Check",
+              "timedOut": null,
+              "duration": 242,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "cy.resetSession();\n(0,_utils_api__WEBPACK_IMPORTED_MODULE_0__.assertFunctionalityHealthCheck)('hermod').then(function (res) {\n    expect(res.status).to.equal(200);\n    expect(res.body.status).to.satisfy(function (status) { return status === 'UP' || status === 'WARN'; });\n    cy.log('Hermod Health Check : ' + res.body.status);\n});",
+              "err": {},
+              "uuid": "38c7dc7e-c14f-4787-a6a4-09e138ebb9a1",
+              "parentUUID": "2ce267ea-05bd-4099-bbf9-296d77852fb8",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "38c7dc7e-c14f-4787-a6a4-09e138ebb9a1"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 242,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.0.1"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "mochawesome",
+        "saveHtml": false,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "7.1.3"
+    },
+    "marge": {
+      "options": {
+        "reportDir": "reports",
+        "reportTitle": "End 2 end smoke tests",
+        "reportPageTitle": "End 2 end tests report",
+        "overwrite": false,
+        "html": false,
+        "json": true
+      },
+      "version": "6.2.0"
+    }
+  }
+}

@@ -1,0 +1,107 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 1,
+    "passes": 1,
+    "pending": 0,
+    "failures": 0,
+    "start": "2024-09-20T17:43:22.048Z",
+    "end": "2024-09-20T17:43:27.447Z",
+    "duration": 5399,
+    "testsRegistered": 1,
+    "passPercent": 100,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "bfd984e3-f253-4ed3-83e3-8d9ef920af14",
+      "title": "",
+      "fullFile": "integration/cronos/alarm-tests.smoke.cy.ts",
+      "file": "integration/cronos/alarm-tests.smoke.cy.ts",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "56520fb7-028d-4046-bc69-0fdcaa8830b0",
+          "title": "Alarm Tests PFM-TC-765 PFM-TC-574",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "Start Alarm Test",
+              "fullTitle": "Alarm Tests PFM-TC-765 PFM-TC-574 Start Alarm Test",
+              "timedOut": null,
+              "duration": 5221,
+              "state": "passed",
+              "speed": "medium",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "var isModificationDate = false;\ncy.conserveSession();\ncy.navigateToCronos('alarms');\n// alarm\n_page_objects_models_alarm_page__WEBPACK_IMPORTED_MODULE_0__[\"default\"].menuAlarm().should('be.visible');\n_page_objects_models_alarm_page__WEBPACK_IMPORTED_MODULE_0__[\"default\"].menuHistory().should('be.visible');\n_page_objects_models_alarm_page__WEBPACK_IMPORTED_MODULE_0__[\"default\"].filterAlarmPage().should('be.visible');\n_page_objects_models_alarm_page__WEBPACK_IMPORTED_MODULE_0__[\"default\"].getAlarmListItems().then(function ($alarms) {\n    var randomIndex = Math.floor(Math.random() * $alarms.length);\n    var randomAlarm = $alarms.eq(randomIndex);\n    _page_objects_models_alarm_page__WEBPACK_IMPORTED_MODULE_0__[\"default\"].getAlarmDetails(randomAlarm).then(function (alarmDetails) {\n        (0,_utils_methods__WEBPACK_IMPORTED_MODULE_1__.listenAPIRequest)('GET', \"\".concat(Cypress.env('host'), \"/cronos-trigger/api/alarms/launch/\").concat(alarmDetails.service, \"/\").concat(alarmDetails.name));\n        // Use the new method to get the launch button and click it\n        _page_objects_models_alarm_page__WEBPACK_IMPORTED_MODULE_0__[\"default\"].getLaunchButton(randomAlarm).click();\n        (0,_utils_methods__WEBPACK_IMPORTED_MODULE_1__.onAPIRequest)().then(function (response) {\n            var responseDate = response.headers.date.toString();\n            var responseDateAsJsDate = new Date(responseDate);\n            var formattedDate;\n            if (Cypress.env('locale') === 'fr') {\n                formattedDate = moment_timezone__WEBPACK_IMPORTED_MODULE_2__(responseDateAsJsDate).tz('Europe/Paris').format('DD/MM/YYYY HH:mm');\n            }\n            else {\n                formattedDate = moment_timezone__WEBPACK_IMPORTED_MODULE_2__(responseDateAsJsDate).tz('Europe/Paris').format('M/D/YY, LT');\n            }\n            // verify success toast message\n            _page_objects_models_alarm_page__WEBPACK_IMPORTED_MODULE_0__[\"default\"].i18nGetToast('success').should('be.visible').and('contain', Cypress.i18nCronos('crn.alarms.launch.test.toast.success'));\n            // history\n            _page_objects_models_alarm_page__WEBPACK_IMPORTED_MODULE_0__[\"default\"].menuHistory().click();\n            _page_objects_models_alarm_page__WEBPACK_IMPORTED_MODULE_0__[\"default\"].filterHistoryPage().should('be.visible');\n            _page_objects_models_alarm_page__WEBPACK_IMPORTED_MODULE_0__[\"default\"].menuAlarm().should('be.visible');\n            _page_objects_models_alarm_page__WEBPACK_IMPORTED_MODULE_0__[\"default\"].resultList().should('be.visible');\n            _page_objects_models_alarm_page__WEBPACK_IMPORTED_MODULE_0__[\"default\"].lastStartedAlarm().within(function () {\n                if (alarmDetails.service !== null || alarmDetails.service !== '') {\n                    cy.get('.cell.service').should('have.text', alarmDetails.service);\n                }\n                if (alarmDetails.name !== null || alarmDetails.name !== '') {\n                    cy.get('.cell.name').should('have.text', alarmDetails.name);\n                }\n                if (alarmDetails.modificationDate.length !== 0) {\n                    isModificationDate = true;\n                }\n                (0,_utils_utils__WEBPACK_IMPORTED_MODULE_3__.assertFormattedDateCronos)(formattedDate, isModificationDate);\n            });\n        });\n    });\n});",
+              "err": {},
+              "uuid": "23518c8b-f13d-4a62-8823-15b1ac96efc9",
+              "parentUUID": "56520fb7-028d-4046-bc69-0fdcaa8830b0",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "23518c8b-f13d-4a62-8823-15b1ac96efc9"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 5221,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.0.1"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "mochawesome",
+        "saveHtml": false,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "7.1.3"
+    },
+    "marge": {
+      "options": {
+        "reportDir": "reports",
+        "reportTitle": "End 2 end smoke tests",
+        "reportPageTitle": "End 2 end tests report",
+        "overwrite": false,
+        "html": false,
+        "json": true
+      },
+      "version": "6.2.0"
+    }
+  }
+}

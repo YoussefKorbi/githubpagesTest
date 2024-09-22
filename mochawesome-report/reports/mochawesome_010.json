@@ -1,0 +1,107 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 1,
+    "passes": 1,
+    "pending": 0,
+    "failures": 0,
+    "start": "2024-09-20T17:46:13.835Z",
+    "end": "2024-09-20T17:46:40.910Z",
+    "duration": 27075,
+    "testsRegistered": 1,
+    "passPercent": 100,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "5bc8a30e-ebe6-4df8-a01a-d34d05f4e6c0",
+      "title": "",
+      "fullFile": "integration/tracking/Support/check-user-account-blocking-trace.smoke.cy.ts",
+      "file": "integration/tracking/Support/check-user-account-blocking-trace.smoke.cy.ts",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "509e4d3d-e948-4fd0-811b-c2ec25b48a40",
+          "title": "PFM-TC-2811 Verify log for user account blocking",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "PFM-TC-2811 Get locked user info and review events related to account blocking",
+              "fullTitle": "PFM-TC-2811 Verify log for user account blocking PFM-TC-2811 Get locked user info and review events related to account blocking",
+              "timedOut": null,
+              "duration": 26546,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "cy.resetSession();\ncy.login({\n    username: support.username,\n    password: support.password,\n}, support.workspace);\ncy.navigateToNone();\n(0,_utils_api__WEBPACK_IMPORTED_MODULE_9__.getLockedUserInfo)(subjectUserBlocked, email, wsLocale).then(function (_a) {\n    var addressIp = _a.addressIp, date = _a.date;\n    addressIpUser = addressIp;\n    var dateTime = date;\n    var application = Cypress.i18nTracking('tr.applications.HEIMDALL.label');\n    var errorEvent = Cypress.i18nTracking('tr.events.ACCOUNT_BLOCKED.label');\n    var ongletEvent = [\n        { key: 'tr.event-details.session.workspaceName', value: wsName },\n        { key: 'tr.event-details.timestamp', value: dateTime },\n        { key: 'tr.event-details.session.serviceName', value: application },\n        { key: 'tr.event-details.eventType', value: errorEvent },\n        { key: 'tr.event-details.session.ipAddress', value: addressIpUser },\n        { key: 'tr.event-details.session.scheme', value: scheme },\n    ];\n    var ongletUser = [\n        { key: 'tr.event-details.user.name', value: userFullName },\n        { key: 'tr.event-details.user.userType', value: userType },\n        { key: 'tr.event-details.user.login', value: userLogin },\n        { key: 'tr.event-details.user.email', value: email },\n        { key: 'tr.event-details.user.company', value: userCompany },\n        { key: 'tr.event-details.user.userUuid', value: userId },\n    ];\n    var ongletDetails = [\n        { key: 'workspace', value: wsName },\n        { key: 'login', value: userLogin },\n        { key: 'ip', value: addressIpUser },\n        { key: 'type', value: typeDetails },\n        { key: 'countFailedAttempts', value: totalFailureConnection.toString() },\n        { key: 'maxFailedAttemptsReached', value: maxFailedAttemptsOption.toString() },\n    ];\n    _page_objects_models_home_page__WEBPACK_IMPORTED_MODULE_1__[\"default\"].bodyddlUserbtnApplication('TRACKING').should('be.visible');\n    (0,_utils_methods__WEBPACK_IMPORTED_MODULE_2__.bodyddlUserApplicationInfo)('TRACKING', 'oo.platform.applications.support.TRACKING');\n    _page_objects_models_home_page__WEBPACK_IMPORTED_MODULE_1__[\"default\"].bodyddlUserbtnApplication('TRACKING').click();\n    _page_objects_models_portail_gestion_acces__WEBPACK_IMPORTED_MODULE_0__[\"default\"].rSideNavbarcbxSelectWorkspace().should('contain', Cypress.i18nTracking('tr.select.workspace.placeholder'));\n    _page_objects_models_portail_gestion_acces__WEBPACK_IMPORTED_MODULE_0__[\"default\"].rSideNavbarcbxSelectWorkspace().click();\n    _page_objects_models_portail_gestion_acces__WEBPACK_IMPORTED_MODULE_0__[\"default\"].rSideNavCbxSelectWorkspaceDdl(wsName);\n    _page_objects_models_portail_gestion_acces__WEBPACK_IMPORTED_MODULE_0__[\"default\"].rSideNavbarcbxSelectWorkspace().should('be.visible').and('contain', wsName);\n    _page_objects_models_tracking_page__WEBPACK_IMPORTED_MODULE_8__[\"default\"].filterButton('events-filter').should('be.visible');\n    _page_objects_models_tracking_page__WEBPACK_IMPORTED_MODULE_8__[\"default\"].bodyActivity().then(function (lines) {\n        var matchingElements = lines.filter(function (_index, line) {\n            var user = Cypress.$(line).find('[data-qa=\"user\"]').text()\n                .trim();\n            var eventType = Cypress.$(line).find('[data-qa=\"event-type\"]').text()\n                .trim();\n            return user === userFullName && eventType === Cypress.i18nTracking('tr.events.ACCOUNT_BLOCKED.label');\n        });\n        expect(matchingElements.length).to.equal(1);\n        cy.wrap(matchingElements).first().click();\n        _page_objects_models_tracking_page__WEBPACK_IMPORTED_MODULE_8__[\"default\"].bodyBtnActivityTabEvent('tr.history.activities.detail.tabs.events.label').should('be.visible');\n        ongletEvent.forEach(function (_a) {\n            var key = _a.key, value = _a.value;\n            var translatedKey = Cypress.i18nTracking(key);\n            _page_objects_models_tracking_page__WEBPACK_IMPORTED_MODULE_8__[\"default\"].getItem(translatedKey).should('contain', value);\n        });\n        navigatorLanguages.forEach(function (lang) {\n            var languageKey = Cypress.i18nTracking('tr.event-details.session.language');\n            _page_objects_models_tracking_page__WEBPACK_IMPORTED_MODULE_8__[\"default\"].getItem(languageKey).should('contain', lang);\n        });\n        _page_objects_models_tracking_page__WEBPACK_IMPORTED_MODULE_8__[\"default\"].bodyBtnActivityTabEvent('tr.history.activities.detail.tabs.user.label').should('be.visible').click();\n        ongletUser.forEach(function (_a) {\n            var key = _a.key, value = _a.value;\n            var translatedKey = Cypress.i18nTracking(key);\n            _page_objects_models_tracking_page__WEBPACK_IMPORTED_MODULE_8__[\"default\"].getItem(translatedKey).should('contain', value);\n        });\n        _page_objects_models_tracking_page__WEBPACK_IMPORTED_MODULE_8__[\"default\"].bodyBtnActivityTabEvent('tr.history.activities.detail.tabs.details.label').should('be.visible').click();\n        _page_objects_models_tracking_page__WEBPACK_IMPORTED_MODULE_8__[\"default\"].bodyBtnActivityTabEvent('tr.history.activities.detail.tabs.details.label').click();\n        ongletDetails.forEach(function (_a) {\n            var key = _a.key, value = _a.value;\n            _page_objects_models_tracking_page__WEBPACK_IMPORTED_MODULE_8__[\"default\"].getJsonViewerSegmentByKey(key).should('contain', value);\n        });\n    });\n});",
+              "err": {},
+              "uuid": "4d75eb43-818a-4a20-abe0-4f69eb384cb9",
+              "parentUUID": "509e4d3d-e948-4fd0-811b-c2ec25b48a40",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "4d75eb43-818a-4a20-abe0-4f69eb384cb9"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 26546,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.0.1"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "mochawesome",
+        "saveHtml": false,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "7.1.3"
+    },
+    "marge": {
+      "options": {
+        "reportDir": "reports",
+        "reportTitle": "End 2 end smoke tests",
+        "reportPageTitle": "End 2 end tests report",
+        "overwrite": false,
+        "html": false,
+        "json": true
+      },
+      "version": "6.2.0"
+    }
+  }
+}

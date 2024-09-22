@@ -1,0 +1,126 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 2,
+    "passes": 2,
+    "pending": 0,
+    "failures": 0,
+    "start": "2024-09-20T17:45:23.158Z",
+    "end": "2024-09-20T17:45:59.299Z",
+    "duration": 36141,
+    "testsRegistered": 2,
+    "passPercent": 100,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "e50cd1ca-8c79-4a64-8f26-d367b36c3405",
+      "title": "",
+      "fullFile": "integration/my account/modify-user-password.smoke.cy.ts",
+      "file": "integration/my account/modify-user-password.smoke.cy.ts",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "c083009f-5bc7-4000-9c4e-9f591a467a06",
+          "title": "Modify user password",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "Modify user password via account page PFM-TC-557",
+              "fullTitle": "Modify user password Modify user password via account page PFM-TC-557",
+              "timedOut": null,
+              "duration": 18880,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "(0,_models_users_api_platforme_user__WEBPACK_IMPORTED_MODULE_2__.createUser)(wsName, true, 'OPEN', 'NONE')\n    .then(function (res) {\n    userId = res.id;\n    userName = res.login;\n    email = res.email;\n    userDisplayName = res.firstName + ' ' + res.lastName;\n    listeIdsUtilisateurs.push(userId);\n    (0,_utils_methods__WEBPACK_IMPORTED_MODULE_1__.generatePassword)(subject, email, userPassword);\n    cy.login({ username: userName, password: userPassword }, Cypress.env('workspace'));\n    switch (location) {\n        case 'account page':\n            (0,_utils_methods__WEBPACK_IMPORTED_MODULE_1__.accesMainMenuAccount)(wsName, userDisplayName);\n            _page_objects_models_all__WEBPACK_IMPORTED_MODULE_3__[\"default\"].headerBtnModifyAccount().first().should('be.visible')\n                .then(function ($button) {\n                var parent = $button.parent();\n                var href = parent.attr('href');\n                expect(href).to.match(new RegExp(\"/portal/ws/\".concat(wsName, \"/account/\")));\n                if (href) {\n                    cy.visit(href).then(function () {\n                        cy.url().should('eq', \"\".concat(Cypress.env('host')).concat(href));\n                        _page_objects_models_account_page__WEBPACK_IMPORTED_MODULE_4__[\"default\"].bodybtnModifyPassword().click();\n                    });\n                    modifyPasswordScript(email, userName, userDisplayName);\n                }\n            });\n            break;\n        case 'portal modal':\n            _page_objects_models_home_page__WEBPACK_IMPORTED_MODULE_7__[\"default\"].visitToWs(wsName);\n            _page_objects_models_home_page__WEBPACK_IMPORTED_MODULE_7__[\"default\"].bodyWelcomeMsg().should('contain', Cypress.i18n('asg.home.welcome.title', { name: userDisplayName }));\n            _page_objects_models_all__WEBPACK_IMPORTED_MODULE_3__[\"default\"].headerBtnAccount().click();\n            _page_objects_models_all__WEBPACK_IMPORTED_MODULE_3__[\"default\"].headerMainMenu().within(function () {\n                _page_objects_models_all__WEBPACK_IMPORTED_MODULE_3__[\"default\"].headerbtnMainMenuAccount().click();\n            });\n            _page_objects_models_all__WEBPACK_IMPORTED_MODULE_3__[\"default\"].headertxtAccountModalChangePassword().click();\n            modifyPasswordScript(email, userName, userDisplayName);\n            break;\n    }\n});",
+              "err": {},
+              "uuid": "3e454fd6-bd75-4705-8678-540ffbd50b12",
+              "parentUUID": "c083009f-5bc7-4000-9c4e-9f591a467a06",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Modify user password via portal modal PFM-TC-950",
+              "fullTitle": "Modify user password Modify user password via portal modal PFM-TC-950",
+              "timedOut": null,
+              "duration": 14729,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "(0,_models_users_api_platforme_user__WEBPACK_IMPORTED_MODULE_2__.createUser)(wsName, true, 'OPEN', 'NONE')\n    .then(function (res) {\n    userId = res.id;\n    userName = res.login;\n    email = res.email;\n    userDisplayName = res.firstName + ' ' + res.lastName;\n    listeIdsUtilisateurs.push(userId);\n    (0,_utils_methods__WEBPACK_IMPORTED_MODULE_1__.generatePassword)(subject, email, userPassword);\n    cy.login({ username: userName, password: userPassword }, Cypress.env('workspace'));\n    switch (location) {\n        case 'account page':\n            (0,_utils_methods__WEBPACK_IMPORTED_MODULE_1__.accesMainMenuAccount)(wsName, userDisplayName);\n            _page_objects_models_all__WEBPACK_IMPORTED_MODULE_3__[\"default\"].headerBtnModifyAccount().first().should('be.visible')\n                .then(function ($button) {\n                var parent = $button.parent();\n                var href = parent.attr('href');\n                expect(href).to.match(new RegExp(\"/portal/ws/\".concat(wsName, \"/account/\")));\n                if (href) {\n                    cy.visit(href).then(function () {\n                        cy.url().should('eq', \"\".concat(Cypress.env('host')).concat(href));\n                        _page_objects_models_account_page__WEBPACK_IMPORTED_MODULE_4__[\"default\"].bodybtnModifyPassword().click();\n                    });\n                    modifyPasswordScript(email, userName, userDisplayName);\n                }\n            });\n            break;\n        case 'portal modal':\n            _page_objects_models_home_page__WEBPACK_IMPORTED_MODULE_7__[\"default\"].visitToWs(wsName);\n            _page_objects_models_home_page__WEBPACK_IMPORTED_MODULE_7__[\"default\"].bodyWelcomeMsg().should('contain', Cypress.i18n('asg.home.welcome.title', { name: userDisplayName }));\n            _page_objects_models_all__WEBPACK_IMPORTED_MODULE_3__[\"default\"].headerBtnAccount().click();\n            _page_objects_models_all__WEBPACK_IMPORTED_MODULE_3__[\"default\"].headerMainMenu().within(function () {\n                _page_objects_models_all__WEBPACK_IMPORTED_MODULE_3__[\"default\"].headerbtnMainMenuAccount().click();\n            });\n            _page_objects_models_all__WEBPACK_IMPORTED_MODULE_3__[\"default\"].headertxtAccountModalChangePassword().click();\n            modifyPasswordScript(email, userName, userDisplayName);\n            break;\n    }\n});",
+              "err": {},
+              "uuid": "b5570d00-9dc4-4bf7-8790-41ca0a10aeeb",
+              "parentUUID": "c083009f-5bc7-4000-9c4e-9f591a467a06",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "3e454fd6-bd75-4705-8678-540ffbd50b12",
+            "b5570d00-9dc4-4bf7-8790-41ca0a10aeeb"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 33609,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.0.1"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "mochawesome",
+        "saveHtml": false,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "7.1.3"
+    },
+    "marge": {
+      "options": {
+        "reportDir": "reports",
+        "reportTitle": "End 2 end smoke tests",
+        "reportPageTitle": "End 2 end tests report",
+        "overwrite": false,
+        "html": false,
+        "json": true
+      },
+      "version": "6.2.0"
+    }
+  }
+}

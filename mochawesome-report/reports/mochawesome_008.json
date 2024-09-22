@@ -1,0 +1,164 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 4,
+    "passes": 4,
+    "pending": 0,
+    "failures": 0,
+    "start": "2024-09-20T17:44:21.283Z",
+    "end": "2024-09-20T17:45:09.943Z",
+    "duration": 48660,
+    "testsRegistered": 4,
+    "passPercent": 100,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "5274d41b-2967-42a0-b7da-e017e4364578",
+      "title": "",
+      "fullFile": "integration/legal texts/as-supervisor-edit-one-time-validation-UGC-and-check-user-acceptence.smoke.cy.ts",
+      "file": "integration/legal texts/as-supervisor-edit-one-time-validation-UGC-and-check-user-acceptence.smoke.cy.ts",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "04e8b866-1319-4f0c-8bb7-0ae8a2bd12bc",
+          "title": "PFM-TC-3293 Edit CGU PDF",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "Connect as a user and accept UGC for the first time",
+              "fullTitle": "PFM-TC-3293 Edit CGU PDF Connect as a user and accept UGC for the first time",
+              "timedOut": null,
+              "duration": 31417,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "placeHolder = Cypress.i18nLegalNotices('ln.legalNotice.field.title.placeholder');\ncguAddPdfText = Cypress.i18nLegalNotices('ln.legalNotice.field.document.import.empty.label');\npopupSucessEditText = Cypress.i18nLegalNotices('ln.legalNotice.edit.success');\npopupSucessFileEditText = Cypress.i18nLegalNotices('ln.legalNotice.document.success.attach');\nvar user = usersToCreate[1];\n(0,_utils_methods__WEBPACK_IMPORTED_MODULE_8__.resetSessionVisitAndLogin)(user.login, user.mdp, wsName, false);\n// The user should see the UGC for the first time and accept it and be redirected to the home page\n(0,_utils_methods__WEBPACK_IMPORTED_MODULE_8__.handleCGUAcceptance)(user.displayName, title, 'ACCEPT');",
+              "err": {},
+              "uuid": "022a6e18-c3a4-4c1c-b0fc-0f2ab9b58867",
+              "parentUUID": "04e8b866-1319-4f0c-8bb7-0ae8a2bd12bc",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Verify that the UGC is not displayed after being accepted",
+              "fullTitle": "PFM-TC-3293 Edit CGU PDF Verify that the UGC is not displayed after being accepted",
+              "timedOut": null,
+              "duration": 3450,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "var user = usersToCreate[1];\n(0,_utils_methods__WEBPACK_IMPORTED_MODULE_8__.resetSessionVisitAndLogin)(user.login, user.mdp, wsName, false);\n// Verify that the user does not see the UGC again after previously accepting it\n_page_objects_models_home_page__WEBPACK_IMPORTED_MODULE_9__[\"default\"].bodyWelcomeMsg().should('contain', Cypress.i18n('asg.home.welcome.title', { name: user.displayName }));",
+              "err": {},
+              "uuid": "584a598b-090c-4e55-a787-7aad72cc2f5c",
+              "parentUUID": "04e8b866-1319-4f0c-8bb7-0ae8a2bd12bc",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Connect as Supervisor, edit UGC title and replace attached PDF",
+              "fullTitle": "PFM-TC-3293 Edit CGU PDF Connect as Supervisor, edit UGC title and replace attached PDF",
+              "timedOut": null,
+              "duration": 6819,
+              "state": "passed",
+              "speed": "medium",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "var supervisor = usersToCreate[0];\n(0,_utils_methods__WEBPACK_IMPORTED_MODULE_8__.resetSessionVisitAndLogin)(supervisor.login, supervisor.mdp, wsName);\n_page_objects_models_home_page__WEBPACK_IMPORTED_MODULE_9__[\"default\"].bodyWelcomeMsg().should('contain', Cypress.i18n('asg.home.welcome.title', { name: supervisor.displayName }));\n_page_objects_models_all__WEBPACK_IMPORTED_MODULE_10__[\"default\"].legalNoticeApp().click();\n_page_objects_models_cgu_administration_page__WEBPACK_IMPORTED_MODULE_11__[\"default\"].legalTextsTitle().should('be.visible');\n// Supervisor should edit the UGC title and replace the attached document\n_page_objects_models_cgu_administration_page__WEBPACK_IMPORTED_MODULE_11__[\"default\"].getFIrstLegalNoticeTitleCell().contains(title).should('exist')\n    .and('be.visible')\n    .dblclick();\n_page_objects_models_cgu_edit_page__WEBPACK_IMPORTED_MODULE_12__[\"default\"].cguEditPageTitle().should('be.visible');\n_page_objects_models_cgu_edit_page__WEBPACK_IMPORTED_MODULE_12__[\"default\"].cguditInputTitle(placeHolder).invoke('val').then(function (inputValue) {\n    expect(inputValue).to.equal(title);\n});\n_page_objects_models_cgu_edit_page__WEBPACK_IMPORTED_MODULE_12__[\"default\"].locateFileNameElement().invoke('text').then(function (fileName) {\n    fileName = fileName.replace('.pdf', '');\n    expect(fileName).to.equal(title);\n});\n// Rename the UGC to verify the file was modified when logging in as USER\n_page_objects_models_cgu_edit_page__WEBPACK_IMPORTED_MODULE_12__[\"default\"].cguditInputTitle(placeHolder).type('{selectall}{backspace}').type(title2);\n_page_objects_models_cgu_edit_page__WEBPACK_IMPORTED_MODULE_12__[\"default\"].cguditInputTitle(placeHolder).invoke('val').then(function (inputValue) {\n    expect(inputValue).to.equal(title2);\n});\n// Verify UGC options radio buttons and switch buttons are configured as it should be\n(0,_utils_methods__WEBPACK_IMPORTED_MODULE_8__.verifyElementStates)(elements);\n_page_objects_models_cgu_edit_page__WEBPACK_IMPORTED_MODULE_12__[\"default\"].removeCguFile().click();\n_page_objects_models_cgu_edit_page__WEBPACK_IMPORTED_MODULE_12__[\"default\"].addPdfText().should('be.visible').and('contain.text', cguAddPdfText);\n_page_objects_models_cgu_edit_page__WEBPACK_IMPORTED_MODULE_12__[\"default\"].browseCguFile().should('exist')\n    .and('be.visible');\n// Drag and drop the new UGC file and verify the file was changed succefully\nvar fileName = 'example.pdf';\ncy.fixture(fileName).as('myFixture');\n_page_objects_models_cgu_edit_page__WEBPACK_IMPORTED_MODULE_12__[\"default\"].browseCguFile().should('be.visible').selectFile({ contents: '@myFixture', fileName: fileName }, { action: 'drag-drop', force: true });\n_page_objects_models_cgu_edit_page__WEBPACK_IMPORTED_MODULE_12__[\"default\"].locateFileNameElement().invoke('text').then(function (res) {\n    res = fileName.replace('.pdf', '');\n    fileName = fileName.replace('.pdf', '');\n    expect(res).to.equal(fileName);\n});\n// Intercept new fileId to be compared with the fileId when connecting with the user\nvar endPointAttach = '/legal-notices/api/legal-notices/*/actions/attach';\n(0,_utils_methods__WEBPACK_IMPORTED_MODULE_1__.listenAPIRequest)('POST', endPointAttach);\n// To save to edits\n_page_objects_models_cgu_edit_page__WEBPACK_IMPORTED_MODULE_12__[\"default\"].saveEdits().click();\n(0,_utils_methods__WEBPACK_IMPORTED_MODULE_1__.onAPIRequest)().then(function (interception) {\n    var _a, _b;\n    expect(interception.statusCode).to.be.equal(201);\n    // Record modification time\n    editTime = new Date();\n    if (interception && interception.statusCode === 201) {\n        if ((_b = (_a = interception.body) === null || _a === void 0 ? void 0 : _a.properties) === null || _b === void 0 ? void 0 : _b.filename) {\n            // To extract the filename from the response\n            filenIdAfterEdit = interception.body.id;\n        }\n    }\n    else {\n        throw new Error('No response or incorrect status code for the attach document request');\n    }\n});\n_page_objects_models_cgu_administration_page__WEBPACK_IMPORTED_MODULE_11__[\"default\"].getFIrstLegalNoticeTitleCell().contains(title2).should('exist')\n    .and('be.visible');\n_page_objects_models_login_page__WEBPACK_IMPORTED_MODULE_14__[\"default\"].i18nGetToast('success').eq(0)\n    .should('contain', popupSucessEditText);\n_page_objects_models_login_page__WEBPACK_IMPORTED_MODULE_14__[\"default\"].i18nGetToast('success').eq(1)\n    .should('contain', popupSucessFileEditText);\n// Verify the edit time is les then 1 minute\ncy.wrap(false).as('editTimeIsOk');\n// Iterate through each validation row\n_page_objects_models_cgu_administration_page__WEBPACK_IMPORTED_MODULE_11__[\"default\"].getValidationRows().each(function ($row) {\n    cy.get('@editTimeIsOk').then(function (editTimeIsOk) {\n        if (editTimeIsOk) {\n            return;\n        }\n        // Extract the validation date from the row\n        _page_objects_models_cgu_administration_page__WEBPACK_IMPORTED_MODULE_11__[\"default\"].getLastEditCell($row).invoke('text').then(function (validationDateText) {\n            // Get the date format based on the locale dynamically\n            var dateFormat = (0,_utils_date__WEBPACK_IMPORTED_MODULE_15__.getDateFormatByLocale)(locale);\n            // Parse the date using moment with the locale-specific format\n            var receivedDate = moment__WEBPACK_IMPORTED_MODULE_16__(validationDateText.trim(), \"\".concat(dateFormat, \" h:mm A\"));\n            if (receivedDate.isValid()) {\n                // Calculate the time difference between editTime and validationDate\n                var timeDifference = Math.abs(editTime.getTime() - receivedDate.toDate().getTime());\n                // If the time difference is within the allowed margin, set editTimeIsOk to true\n                if (timeDifference <= timeMarginInMs) {\n                    cy.wrap(true).as('editTimeIsOk');\n                }\n            }\n        });\n    });\n}).then(function () {\n    cy.get('@editTimeIsOk').should('be.true');\n});",
+              "err": {},
+              "uuid": "a2e1443e-3dfb-4be6-8883-77ae17487e49",
+              "parentUUID": "04e8b866-1319-4f0c-8bb7-0ae8a2bd12bc",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Connect as USER, Check & accept the newly updated UGC",
+              "fullTitle": "PFM-TC-3293 Edit CGU PDF Connect as USER, Check & accept the newly updated UGC",
+              "timedOut": null,
+              "duration": 4279,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "var user = usersToCreate[1];\nvar documentId;\n// Intercept new fileId to be compared with the fileId when connecting with the user\nvar endPointAttach = '/legal-notices/public/legal-notices/*/documents/*/actions/download';\n(0,_utils_methods__WEBPACK_IMPORTED_MODULE_1__.listenAPIRequest)('GET', endPointAttach);\n(0,_utils_methods__WEBPACK_IMPORTED_MODULE_8__.resetSessionVisitAndLogin)(user.login, user.mdp, wsName, false);\n(0,_utils_methods__WEBPACK_IMPORTED_MODULE_1__.onAPIRequest)().then(function (interception) {\n    if (interception && interception.statusCode === 200) {\n        // Extract the content-disposition header\n        var contentDisposition = interception.headers['content-disposition'];\n        // Check if contentDisposition is an array or a string and ensure it's a string\n        var contentDispositionString = Array.isArray(contentDisposition) ? contentDisposition[0] : contentDisposition;\n        // Extract the document ID from the content-disposition header\n        var documentIdMatch = contentDispositionString.match(/filename=\"(.+?)\"/);\n        if (documentIdMatch) {\n            documentId = documentIdMatch[1];\n        }\n        else {\n            throw new Error('Failed to extract document ID from content-disposition');\n        }\n    }\n    else {\n        throw new Error('No response or incorrect status code for the document download request');\n    }\n}).then(function () {\n    // Check if the file ID displayed matches the new filenId uploaded\n    expect(documentId).to.equal(filenIdAfterEdit);\n});\n// Verify the user is redirected to the home page\n(0,_utils_methods__WEBPACK_IMPORTED_MODULE_8__.handleCGUAcceptance)(user.displayName, title2, 'ACCEPT');",
+              "err": {},
+              "uuid": "4275fb9b-edae-4a4d-af6b-b421ff50eb76",
+              "parentUUID": "04e8b866-1319-4f0c-8bb7-0ae8a2bd12bc",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "022a6e18-c3a4-4c1c-b0fc-0f2ab9b58867",
+            "584a598b-090c-4e55-a787-7aad72cc2f5c",
+            "a2e1443e-3dfb-4be6-8883-77ae17487e49",
+            "4275fb9b-edae-4a4d-af6b-b421ff50eb76"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 45965,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.0.1"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "mochawesome",
+        "saveHtml": false,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "7.1.3"
+    },
+    "marge": {
+      "options": {
+        "reportDir": "reports",
+        "reportTitle": "End 2 end smoke tests",
+        "reportPageTitle": "End 2 end tests report",
+        "overwrite": false,
+        "html": false,
+        "json": true
+      },
+      "version": "6.2.0"
+    }
+  }
+}
